@@ -1,19 +1,27 @@
-import * as React from 'react';
+ import * as React from 'react';
 import type { Metadata } from 'next';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { Download as DownloadIcon } from '@phosphor-icons/react/dist/ssr/Download';
-import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
-import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
+// import Typography from '@mui/material/Typography';
+// import { Download as DownloadIcon } from '@phosphor-icons/react/dist/ssr/Download';
+// import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
+// import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import { CustomersFilters } from '@/components/dashboard/customer/customers-filters';
-import { CustomersTable } from '@/components/dashboard/customer/customers-table';
-import type { Customer } from '@/components/dashboard/customer/customers-table';
+import { MoradoresFilters } from '@/components/dashboard/moradores/moradores-filters';
+import {  type Customer, MoradoresTable } from '@/components/dashboard/moradores/moradores-table';
+import HeaderBreadcrumbs from '@/components/components/header-breadcrumbs';
+import { paths } from '@/paths';
+import { Card, IconButton, Tooltip } from '@mui/material';
+// import { PlusCircle } from '@phosphor-icons/react';
+import NextLink from 'next/link';
+// import {PlusCircle as PlusCircleIcon } from '@phosphor-icons/react/dist/ssr';
+import { AddCircleOutlineOutlined } from '@mui/icons-material';
+import ArchiveIcon from '@mui/icons-material/Archive';
 
-export const metadata = { title: `Customers | Dashboard | ${config.site.name}` } satisfies Metadata;
+
+export const metadata = { title: `Moradores | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 const customers = [
   {
@@ -117,9 +125,37 @@ export default function Page(): React.JSX.Element {
 
   return (
     <Stack spacing={3}>
-      <Stack direction="row" spacing={3}>
+      <HeaderBreadcrumbs
+          heading="Listagem de licitação"
+          links={[
+            { name: 'Dashboard', href: paths.dashboard.overview },
+            // { name: 'visitante', href: paths.dashboard.visitantes },
+            { name: 'Listagem' },
+          ]}
+          action={
+            
+              <Stack spacing={1} direction={{ xs: 'row', sm: 'row' }}>
+                
+
+                <NextLink href={paths.dashboard.account} passHref>
+                  <Tooltip title="Novo registro">
+                    <IconButton aria-label="addCircleOutlineOutlined" size="large">
+                      <AddCircleOutlineOutlined/>
+                    </IconButton>
+                  </Tooltip>
+                </NextLink>
+                <Tooltip title="Baixar PDF">
+                    <IconButton aria-label="addCircleOutlineOutlined" size="large">
+                      <ArchiveIcon/>
+                    </IconButton>
+                  </Tooltip>
+                
+              </Stack>
+            
+          }
+        />
+      {/* <Stack direction="row" spacing={3}>
         <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
-          <Typography variant="h4">Customers</Typography>
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />}>
               Import
@@ -134,14 +170,16 @@ export default function Page(): React.JSX.Element {
             Add
           </Button>
         </div>
-      </Stack>
-      <CustomersFilters />
-      <CustomersTable
+      </Stack> */}
+      <Card>
+      <MoradoresFilters />
+      <MoradoresTable
         count={paginatedCustomers.length}
         page={page}
         rows={paginatedCustomers}
         rowsPerPage={rowsPerPage}
       />
+      </Card>
     </Stack>
   );
 }

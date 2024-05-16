@@ -31,10 +31,20 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "variable",
+          "modifiers": ["destructured"],
+          "format": null,
+        },
+      ],
+    
     '@typescript-eslint/no-empty-interface': [
       'error',
       {
-        allowSingleExtends: true,
+        allowSingleExtends: false,
       },
     ],
     '@typescript-eslint/no-shadow': [
@@ -44,8 +54,7 @@ module.exports = {
       },
     ],
     'import/newline-after-import': 'error',
-    'react/jsx-uses-react': 'error',
-    'react/react-in-jsx-scope': 'error',
+    
     'unicorn/filename-case': [
       'error',
       {
