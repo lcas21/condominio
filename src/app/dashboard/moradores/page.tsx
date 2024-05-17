@@ -13,7 +13,7 @@ import { MoradoresFilters } from '@/components/dashboard/moradores/moradores-fil
 import {  type Customer, MoradoresTable } from '@/components/dashboard/moradores/moradores-table';
 import HeaderBreadcrumbs from '@/components/components/header-breadcrumbs';
 import { paths } from '@/paths';
-import { Card, IconButton, Tooltip } from '@mui/material';
+import { Card, Divider, IconButton, Tooltip } from '@mui/material';
 // import { PlusCircle } from '@phosphor-icons/react';
 import NextLink from 'next/link';
 // import {PlusCircle as PlusCircleIcon } from '@phosphor-icons/react/dist/ssr';
@@ -137,7 +137,7 @@ export default function Page(): React.JSX.Element {
               <Stack spacing={1} direction={{ xs: 'row', sm: 'row' }}>
                 
 
-                <NextLink href={paths.dashboard.account} passHref>
+                <NextLink href={paths.dashboard.moradores.new} passHref>
                   <Tooltip title="Novo registro">
                     <IconButton aria-label="addCircleOutlineOutlined" size="large">
                       <AddCircleOutlineOutlined/>
@@ -173,6 +173,7 @@ export default function Page(): React.JSX.Element {
       </Stack> */}
       <Card>
       <MoradoresFilters />
+      <Divider />
       <MoradoresTable
         count={paginatedCustomers.length}
         page={page}
